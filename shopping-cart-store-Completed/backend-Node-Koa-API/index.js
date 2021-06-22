@@ -56,19 +56,37 @@ router.get('/', async ctx => {
         const [products] = await ctx.state.db.query(
             `SELECT * FROM products `
         );
-
-        console.log(products);
-        ctx.body = {products};
-
-
+        ctx.body = { products };
     } catch (err) {
         console.log('/products error', err)
     }
 });
 
-// router.get('/', (ctx) => {
-//     ctx.body = 'Hello World!';
-// });
+router.get('/products/:productCode', async ctx => {
+    try {
+        const [[products]] = await ctx.state.db.query(
+            `SELECT * FROM products WHERE productCode =:productCode`,
+            {
+                productCode: ctx.params.productCode
+            }
+        );
+        ctx.body = { products }
+    } catch (err) {
+        console.log('productCodeID Error', err)
+    }
+})
+
+
+router.get('/shipping' , async ctx =>{ 
+    try {
+        const [shippingOptions] = await ctx.state.db.query(
+            `SELECT * FROM shippingcost `
+        ); 
+            ctx.body = {shippingOptions}
+    } catch (err){ 
+        console.log('Error in the shipping Get', err)
+    }
+})
 
 
 app.use(router.routes());
