@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <h2>Register</h2>
+        <form  [formGroup]="registerForm" (ngSubmit)="onRegister()"> 
+            <input formControlName="firstName" type="text" placeholder="First Name">
+            <input formControlName="lastName" type="text" placeholder="Last Name">
+            <input formControlName="email" type="email" placeholder="Email">
+            <input formControlName="password" type="password" placeholder="Password">
+            <button>Register</button>
+
+           <p class="error-message">{{errorMsg}}</p> 
+        </form>
+    </div>
+</div>

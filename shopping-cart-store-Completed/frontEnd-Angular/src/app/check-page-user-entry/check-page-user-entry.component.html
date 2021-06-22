@@ -1,0 +1,31 @@
+<div class="constainer-fluid">
+  <div class="row justify-content-center entryForm">
+    <div class="col-xs-6 purchaseReview">
+      <app-cart-review></app-cart-review>
+    </div>
+
+    <div class="col-xs-6 colform offset-md-1 userEntryForm">
+      <form
+        [formGroup]="checkoutForm"
+        (ngSubmit)="onSubmit(checkoutForm.value)"
+      >
+        <button (click)="handleSubmitClick()" class="button" type="submit">
+          Complete Purchase
+        </button>
+      </form>
+
+      <div *ngFor="let customerInfo of customerCheckInfo">
+       <p>Last Name: {{ customerInfo.customerLastName }}</p>
+       <p>First Name: {{ customerInfo.customerFirstName }}</p>
+       <p>Phone Number: {{ customerInfo.phone }}</p>
+       <p>Address Line 1: {{ customerInfo.addressLine1 }}</p>
+       <p>Address Line 2: {{ customerInfo.addressLine2 }}</p>
+       <p>City: {{ customerInfo.city }}</p>
+       <p>State: {{ customerInfo.state }}</p>
+       <p>Postal Code: {{ customerInfo.postalCode }}</p>
+       <p>User Name: {{ customerInfo.userName }}</p>
+       <p>Email: {{ customerInfo.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>

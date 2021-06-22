@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <h2>Cart</h2>
+  <div class="row justify-content-center">
+    <div class="col-xs-12 colAnswer">
+      <div *ngIf="items.length >= 1">
+        <h2>Items Selected for Purchase:</h2>
+      </div>
+
+      <div class="cart-item" *ngFor="let item of items">
+        <span>{{ item.productCode }}</span>
+        <span>{{ item.productName }}</span>
+        <span>{{ item.productPrice | currency }}</span>
+
+        <button *ngIf="item; let i = index" (click)="deleteItemCart(item.productCode)">
+          Clear item
+        </button>
+      </div>
+      <div *ngIf="items.length > 0; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock>
+        <app-shipping></app-shipping>
+
+        <span>The item total: {{ itemsTotal['itemsTotal'] | currency: "USD" }}</span>
+        <div *ngFor="let ship of shipping">
+          <span>
+            The selected Shipping Method is:{{ ship.shippingType }}
+            {{ ship.shippingPrice | currency }}
+          </span>
+        </div>
+        <p>The Shopping Cart Total: {{ cartTotal | currency: "USD" }}</p>
+      </ng-template>
+      <ng-template #elseBlock>
+        <h2>The Shopping Cart is Empty</h2>
+        <p>
+          <a routerLink="/shipping">Shipping Prices</a>
+        </p>
+      </ng-template>
+
+      <button
+        (click)="cartsTotal()"
+        [disabled]="items.length <= 0"
+        routerLink="/check-out-page"
+      >
+        Check out Page
+      </button>
+    </div>
+  </div>
+</div>

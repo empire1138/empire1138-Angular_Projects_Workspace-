@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <h1>Email Login</h1>
+    <input [(ngModel)]="email" placeholder="Email" />
+    <input [(ngModel)]="password" placeholder="Password" />
+    <button (click)="logIn()">LogIn</button>
+    <br />
+    <h3>Sign Up</h3>
+    <button type="submit" [routerLink]="'/register'">Click here for Email Register</button>
+
+
+    <p class="error-message">{{errorMsg}}</p>
+  </div>
+</div>

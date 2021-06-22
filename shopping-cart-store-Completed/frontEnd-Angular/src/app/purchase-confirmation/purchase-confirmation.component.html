@@ -1,0 +1,35 @@
+<div class="containter-fluid">
+    <div class="row justify-content-center">
+        <div class="col-xs-12 colAnswer">
+            <h2>Thank you for your Purchase</h2>
+            <h5>Purchase Conformation Information</h5>
+            <p>Email: {{userEntires.email}}</p>
+            <p>First Name: {{userEntires.firstName}}</p>
+            <p>Last Name: {{userEntires.lastName}}</p>
+            <p>Address: {{userEntires.address}}</p>
+            <p>Phone Number:{{userEntires.phoneNumber}} </p>
+
+            <h2>Complete Purchase Review</h2>
+
+            <h3>Items Purchased:</h3>
+            <div class="cart-item" *ngFor="let item of items">
+              <span>{{ item.name }}</span>
+              <span>{{ item.price | currency }}</span>
+            </div>
+      
+            <h3>Total Cost of Items: {{ itemsTotal }}</h3>
+      
+            <div *ngFor="let ship of shipping">
+              <h3>
+                Total Shipping Cost:{{ ship.type }}
+                {{ ship.price | currency }}
+              </h3>
+      
+              <h3>Total Purchase Cost : {{ cartsTotal | currency: "USD" }}</h3>
+      
+
+        </div>
+    </div>
+</div>
+
+

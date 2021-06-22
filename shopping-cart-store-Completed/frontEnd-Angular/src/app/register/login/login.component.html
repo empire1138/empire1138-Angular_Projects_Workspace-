@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row justify-content-center ">
+    <div class="col-xs-6 colform offset-md-1">
+      <h3>Account Login</h3>
+      <input [(ngModel)]="userName" type="text" placeholder="User Name" />
+      <input
+        [(ngModel)]="email"
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email"
+      />
+      <input [(ngModel)]="passWord" type="password" placeholder="PassWord" />
+      <button (click)="customerLogin()">Login</button>
+      <br>
+      <button type="submit" [routerLink]="'/registration'">Need to Register</button>
+
+      <br>
+      <h3>{{errorMsg}}</h3>
+    </div>
+  </div>
+</div>

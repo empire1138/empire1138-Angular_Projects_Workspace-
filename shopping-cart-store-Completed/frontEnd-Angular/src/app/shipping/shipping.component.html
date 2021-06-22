@@ -1,0 +1,16 @@
+
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-xs-12">
+      <h2>Shipping Prices</h2>
+      <div class="shipping-item" *ngFor="let shipping of shippingInfo">
+        <span>{{ shipping.shippingPrice }}</span>
+        <span>{{ shipping.shippingType }}</span>
+        <button (click)="userShippingMethod(shipping)">
+          Selected Shipping Method
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+<
+<div class="container-fluid">
+  <div class="row justify-content-center entryForm">
+    <div class="col-xs-6 purchaseReview"></div>
+
+    <div class="col-xs-6 colform offset-md-1 userEntryForm">
+      <h3>Please Fill out the Information to Complete the registration</h3>
+      <form [formGroup]="registration" >
+        <label for="customerLastName">Last Name</label>
+        <input
+          formControlName="customerLastName"
+          type="text"
+          name="customerLastName"
+          id="customerLastName"
+          class="form-Control"
+        />
+
+        <label for="customerFirstName">First Name</label>
+        <input
+          formControlName="customerFirstName"
+          type="text"
+          name="customerFirstName"
+          id="customerFirstName"
+          class="form-Control"
+        />
+
+        <label for="phone">Phone</label>
+        <input
+          formControlName="phone"
+          type="text"
+          name="phone"
+          id="phone"
+          class="form-Control"
+        />
+
+        <label for="addressLine1">Address Line 1</label>
+        <input
+          formControlName="addressLine1"
+          type="text"
+          name="addressLine1"
+          id="addressLine1"
+          class="form-Control"
+        />
+
+        <label for="addressLine2">Address Line 2</label>
+        <input
+          formControlName="addressLine2"
+          type="text"
+          name="addressLine2"
+          id="addressLine2"
+          class="form-Control"
+        />
+
+        <label for="city">City</label>
+        <input
+          formControlName="city"
+          type="text"
+          name="city"
+          id="city"
+          class="form-Control"
+        />
+        <label for="state">State</label>
+        <input
+          formControlName="state"
+          type="text"
+          name="state"
+          id="state"
+          class="form-Control"
+        />
+        <label for="postalCode">Postal Code</label>
+        <input
+          formControlName="postalCode"
+          type="text"
+          name="postalCode"
+          id="postalCode"
+          class="form-Control"
+        />
+        <label for="userName">User Name</label>
+        <input
+          formControlName="userName"
+          type="text"
+          name="userName"
+          id="userName"
+          class="form-Control"
+        />
+        <label for="email">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          name="email"
+          id="email"
+          class="form-Control"
+          placeholder="example@email.com"
+        />
+        <label for="passWord">Password</label>
+        <input
+          formControlName="passWord"
+          type="password"
+          name="passWord"
+          id="passWord"
+          class="form-Control"
+        />
+        <br />
+        <button  class="button" type="submit" (click)="onSubmit()">
+          Complete Register
+        </button>
+        <p class="error-message">{{ errorMsg }}</p>
+      </form>
+      <br />
+      <p>Already have a Account? Click to login</p>
+      <button [routerLink]="'/login'">Login</button>
+    </div>
+  </div>
+</div>

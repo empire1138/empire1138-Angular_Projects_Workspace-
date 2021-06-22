@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-xs-12">
+      <h1>{{ title }}</h1>
+      <nav>
+        <a routerLink="/dashboard">Dashboard  </a>
+        <a routerLink="/heros">Heroes</a>
+      </nav>
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-xs-12 offset-1">
+      <app-messages></app-messages>
+    </div>
+  </div>
+</div>
