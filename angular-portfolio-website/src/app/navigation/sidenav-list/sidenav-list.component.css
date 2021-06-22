@@ -1,0 +1,7 @@
+a:hover, a:active{
+    color: #d96c06;
+}
+.nav-caption{
+    display: inline-block;
+    padding-left: 6px;
+}

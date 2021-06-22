@@ -1,0 +1,30 @@
+
+
+  .logo{
+     width: 100px;
+     height: 100px;
+  }
+
+  .toolbar{
+      background-color: #F5EFED;
+      color: #0F0A0A;
+  }
+
+  a:hover, a:active{
+    color: #d96c06;
+}
+.nav-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+}
+mat-toolbar{
+    border-radius: 3px;
+    height: 100px;
+}
+@media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0px;
+    }
+}

@@ -1,0 +1,26 @@
+.about-me-body {
+  background-color: #3ab795;
+ 
+  
+}
+
+.into {
+  background-color: #a0e8af;
+  color: black;
+}
+
+h1 {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.name-title {
+  font-size: 3rem;
+}
+
+.sub-name-title{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #696969
+}

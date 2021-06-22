@@ -1,0 +1,88 @@
+<mat-grid-list class="intro" cols="4" rowHeight="750">
+  <section class="container-intro">
+    <div class="intro-section-tile">
+      <h1>Hello, I am <strong>Gabriel Juarez</strong></h1>
+      <p>Web dev</p>
+    </div>
+  </section>
+</mat-grid-list>
+<mat-grid-list class="about-me" cols="4" rowHeight="500">
+  <h1>About Me</h1>
+  <p>My name is Gabriel Juarez. Web developer and all around tech nerd</p>
+  <p>This website is dedicated to showcase my projects</p>
+  <div>
+    <p>
+      Click here to learn more about me...
+      <a mat-button class="about-me-button" routerLink="about-me">About me</a>
+    </p>
+  </div>
+</mat-grid-list>
+<mat-grid-list class="my-work" cols="4" rowHeight="650">
+  <h1>My Portfolio Projects</h1>
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-sm="column"
+    fxLayoutGap="32px"
+    fxLayoutAlign="flex-start"
+  >
+    <ng-container >
+      <mat-card
+        class="project-one cards"
+        fxFlex="0 1 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 1 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+      >
+        <mat-card-header>
+          <mat-card-title>Project one</mat-card-title>
+          <mat-card-subtitle>Angular</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>short Example of project</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>More Description</button>
+          <button mat-button>GitHub</button>
+          <button mat-button>Live Code Version</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card
+        class="project-one cards"
+        fxFlex="0 2 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 2 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+      >
+        <mat-card-header>
+          <mat-card-title>Project one</mat-card-title>
+          <mat-card-subtitle>Angular</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>short Example of project</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>More Description</button>
+          <button mat-button>GitHub</button>
+          <button mat-button>Live Code Version</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card
+        class="project-one cards"
+        fxFlex="0 3 calc(33.3% - 32px)"
+        fxFlex.lt-md="0 3 calc(50% - 32px)"
+        fxFlex.lt-sm="100%"
+      >
+        <mat-card-header>
+          <mat-card-title>Project one</mat-card-title>
+          <mat-card-subtitle>Angular</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>short Example of project</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>More Description</button>
+          <button mat-button>GitHub</button>
+          <button mat-button>Live Code Version</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
+</mat-grid-list>

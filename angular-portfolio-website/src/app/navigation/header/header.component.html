@@ -1,0 +1,26 @@
+<mat-toolbar class="toolbar">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <button mat-button routerLink="">
+      <img class="logo" src="assets/my-logo.png" alt="" />
+    </button>
+  </div>
+
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="nav-items">
+      <li>
+        <a mat-button routerLink="">Home</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/about-me">About me</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/my-work">My Work</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

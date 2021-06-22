@@ -1,0 +1,42 @@
+
+
+
+.intro{
+    background-image: url(../../assets/IMG_20200720_201450651_HDR.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.container-intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+
+.about-me{
+    background-color: #2292a4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-me-button{
+    background-color:#F5EFED ;
+    color: #d96c06;
+}
+
+
+.my-work{
+    background-color: #d96c06;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
