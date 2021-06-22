@@ -8,6 +8,7 @@ const router = new Router();
 const logger = require('koa-logger');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const json = require('koa-json')
 app.use(logger());
 
 //const mysql = require('koa-mysql');
@@ -48,6 +49,7 @@ app.use(async function mysqlConnection(ctx, next) {
 //app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(bodyParser.json());
 
+app.use(json())
 router.get('/', async ctx => {
     try {
 
@@ -56,7 +58,7 @@ router.get('/', async ctx => {
         );
 
         console.log(products);
-        cxt.response.json(products);
+        ctx.body = {products};
 
 
     } catch (err) {
