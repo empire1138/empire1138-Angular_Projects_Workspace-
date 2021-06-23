@@ -1,0 +1,13 @@
+{
+"customerLastName": "fakeTestlastName",
+"customerFirstName":"fakeTestFirstName",
+"phone": "36565487",
+"addressLine1": "2551 place Dr",
+"addressLine2": "",
+"city": "fakeCity",
+"state": "fakeState",
+"postalCode": "54265",
+"userName": "fakeUserName147",
+"email": "fakeEmail3445@email.com",
+"passWord": "fakePassword"
+}

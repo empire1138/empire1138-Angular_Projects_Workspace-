@@ -85,11 +85,13 @@ router.get('/shipping', async ctx => {
 
 
 router.post('/registration', async ctx => {
+   
+
     try {
         let customerreg;
 
         // Hashes the password and inserts the info into the `user` table
-        await bcrypt.hash(ctx.body.passWord, 10).then(async hash => {
+         await bcrypt.hash(ctx.request.body.passWord, 10).then(async hash => {
             try {
                 [customerreg] = await ctx.state.db.query(`
                 INSERT INTO customerreg( customerLastName, customerFirstName, phone, 
@@ -124,13 +126,13 @@ router.post('/registration', async ctx => {
             },
             process.env.JWT_KEY
         );
-        ctx.json({
+        ctx.body=({
             data: encodedCustomer,
             error: false,
             msg: ''
         });
     } catch (err) {
-        res.json({
+        ctx.body=({
             data: null,
             error: true,
             msg: 'Error, please try again'
