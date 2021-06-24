@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
-const morgan = require('morgan')
+const morgan = require('morgan');
 
 //.env loaded file
 require('dotenv').config();
@@ -37,7 +37,7 @@ app.use(async function mysqlConnection(req, res, next) {
         req.db.release();
     } catch (err) {
         // If anything downstream throw an error, we must release the connection allocated for the request
-        console.log(err)
+        console.log(err);
         if (req.db) req.db.release();
         throw err;
     }
@@ -59,7 +59,7 @@ app.get('/', async function (req, res) {
 
 
     } catch (err) {
-        console.log('/products error', err)
+        console.log('/products error', err);
     }
 });
 
@@ -165,7 +165,7 @@ app.post('/login', async function (req, res) {
         }
 
 
-        const customerPassword = `${customerreg.passWord}`
+        const customerPassword = ` ${customerreg.passWord}`;
 
         console.log('customerPassword', customerPassword);
 

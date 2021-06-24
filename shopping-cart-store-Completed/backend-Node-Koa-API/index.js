@@ -6,7 +6,7 @@ const Router = require('koa-router')
 const app = new Koa();
 const router = new Router();
 const logger = require('koa-logger');
-const bodyParser = require('body-parser');
+const bodyParser = require('koa-bodyparser');
 const cors = require('cors');
 const json = require('koa-json')
 const bcrypt = require('bcrypt');
@@ -36,7 +36,7 @@ app.use(async function mysqlConnection(ctx, next) {
         ctx.state.db.release();
     } catch (error) {
         if (ctx.state.db) ctx.state.db.release();
-        throw error
+        throw error;
     }
 })
 
@@ -84,8 +84,9 @@ router.get('/shipping', async ctx => {
 })
 
 
+app.use(bodyParser());
 router.post('/registration', async ctx => {
-   
+   body = ctx.response;
 
     try {
         let customerreg;
@@ -101,22 +102,23 @@ router.post('/registration', async ctx => {
                         :addressLine1, :addressLine2, :city, :state, :postalCode, :userName, 
                         :email, :passWord)
                 `, {
-                    customerLastName: ctx.body.customerLastName,
-                    customerFirstName: ctx.body.customerLastName,
-                    phone: ctx.body.phone,
-                    addressLine1: ctx.body.addressLine1,
-                    addressLine2: ctx.body.addressLine2,
-                    city: ctx.body.city,
-                    state: ctx.body.state,
-                    postalCode: ctx.body.postalCode,
-                    userName: ctx.body.userName,
-                    email: ctx.body.email,
+                    customerLastName: ctx.response.body.customerLastName,
+                    customerFirstName: ctx.response.body.customerFirstName,
+                    phone: ctx.response.body.phone,
+                    addressLine1: ctx.response.body.addressLine1,
+                    addressLine2: ctx.response.body.addressLine2,
+                    city: ctx.response.body.city,
+                    state: ctx.response.body.state,
+                    postalCode: ctx.response.body.postalCode,
+                    userName: ctx.response.body.userName,
+                    email: ctx.response.body.email,
                     passWord: hash,
                 });
                 console.log('customerreg', customerreg)
             } catch (error) {
-                res.json('Error creating customer');
+           
                 console.log('error', error)
+                ctx.throw(401, 'err')
             }
         });
         const encodedCustomer = jwt.sign(
@@ -132,12 +134,13 @@ router.post('/registration', async ctx => {
             msg: ''
         });
     } catch (err) {
-        ctx.body=({
+        ctx.throw=({
             data: null,
             error: true,
             msg: 'Error, please try again'
         });
         console.log('err', err)
+        ctx.throw(err)
     }
 }) 
     
