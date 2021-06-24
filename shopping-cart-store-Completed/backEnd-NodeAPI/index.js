@@ -253,10 +253,6 @@ app.get('/cart', async (req, res ) => {
             `SELECT * FROM customercartorders WHERE email =:email`, {
             email: req.customerreg.email}
         );
-
-        
-        
-
         res.json(cart)
         console.log('cart get works');
     } catch (err) {
