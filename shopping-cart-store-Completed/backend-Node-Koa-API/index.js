@@ -291,11 +291,10 @@ router.get('/cart/itemTotal', async ctx => {
         console.log('Error Getting Item Total', err);
     }
 })
-
-///Need to convert Just a copy paste
-router.get('/check-out-page/customerInfo', async (req, res) => {
+//Stopped Here for now still convert over
+router.get('/check-out-page/customerInfo', async ctx => {
     try {
-        const [customerInfo] = await req.db.query(
+        const [customerInfo] = await req.state.db.query(
             `SELECT customerLastName,
                 customerFirstName,
                 phone,
@@ -307,20 +306,26 @@ router.get('/check-out-page/customerInfo', async (req, res) => {
                 userName,
                 email FROM customerreg WHERE email=:email`,
             {
-                email: req.customerreg.email
+                email: ctx.request.customerreg.email
             })
-        res.json(customerInfo);
+        ctx.body = {customerInfo};
     } catch (err) {
-        console.log('Getting Error CustomerInfo', err);
+        ctx.throw({
+            data: null,
+            error: true,
+            msg: 'Error in Check out Page-CustomerInfo'
+        })
+        console.log('Error Check out Page-CustomerInfo', err);
     }
 })
 
 
+
 //Items are inserted into the "cart" from each product page not the "cart" 
-router.post('/products/:productCode', async (req, res) => {
+router.post('/products/:productCode', async ctx => {
     try {
 
-        const [cart] = await req.db.query(
+        const [cart] = await ctx.state.db.query(
             `INSERT INTO customercartorders (
                 productCode,
                 productName,
@@ -328,22 +333,22 @@ router.post('/products/:productCode', async (req, res) => {
                 email)
                 VALUES (:productCode,:productName,:productPrice, :email)
                 `, {
-            productCode: req.body.productCode,
-            productName: req.body.productName,
-            productPrice: req.body.productPrice,
-            email: req.customerreg.email,
+            productCode: ctx.request.body.productCode,
+            productName: ctx.request.body.productName,
+            productPrice: ctx.request.body.productPrice,
+            email: ctx.request.body.email,
 
         }
         )
 
 
-        res.json({
+        ctx.body({
             data: cart,
             error: false,
             msg: ''
         });
     } catch (err) {
-        res.json({
+        ctx.throw({
             data: null,
             error: true,
             msg: 'Error Adding Item'
@@ -353,12 +358,12 @@ router.post('/products/:productCode', async (req, res) => {
 })
 
 //Deleting items in the cart. 
-router.delete('/cart/:productCode', async (req, res) => {
+router.delete('/cart/:productCode', async ctx => {
     try {
-        const [cart] = await req.db.query(
+        const [cart] = await ctx.state.db.query(
             `DELETE FROM customercartorders WHERE productCode = :productCode AND email =:email `, {
-            productCode: req.params.productCode,
-            email: req.customerreg.email
+            productCode: ctx.params.productCode,
+            email: ctx.request.customerreg.email
         });
         res.json({
             data: cart,
