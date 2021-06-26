@@ -7,7 +7,7 @@ const app = new Koa();
 const router = new Router();
 const logger = require('koa-logger');
 const bodyParser = require('koa-bodyparser');
-const cors = require('cors');
+const cors = require('koa-cors');
 const json = require('koa-json')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -84,7 +84,7 @@ router.get('/shipping', async ctx => {
     }
 })
 
-
+app.use(cors());
 app.use(bodyParser());
 router.post('/registration', async ctx => {
 
@@ -124,7 +124,7 @@ router.post('/registration', async ctx => {
         const encodedCustomer = jwt.sign(
             {
                 customerID: customerreg.customerID,
-                ...ctx.body
+                ...ctx.request.body
             },
             process.env.JWT_KEY
         );
@@ -146,6 +146,7 @@ router.post('/registration', async ctx => {
 
 // Something is wrong with the compare still need to work on
 router.post('/login', async ctx => {
+    
     try {
         const [[customerreg]] = await ctx.state.db.query(`
             SELECT * FROM customerreg WHERE email = :email
@@ -163,9 +164,10 @@ router.post('/login', async ctx => {
 
         console.log(customerreg);
 
-        const customerPassword = ` ${customerreg.passWord}`;
+        const customerPassword = `${customerreg.passWord}`;
 
         console.log('customerPassword', customerPassword);
+        console.log('customerPassword ctx', ctx.request.body.passWord);
 
         const compare = await bcrypt.compare(ctx.request.body.passWord, customerPassword);
 
@@ -181,15 +183,17 @@ router.post('/login', async ctx => {
             }
 
             const encodedCustomer = jwt.sign(payload, process.env.JWT_KEY);
+            
 
-
-            ctx.throw({
+            ctx.body =({
                 data: encodedCustomer,
                 error: false,
                 msg: ''
             })
+            console.log('check2');
+
         } else {
-            ctx.throw({
+            ctx.body = ({
                 data: null,
                 error: true,
                 msg: 'Password not found'
@@ -197,7 +201,7 @@ router.post('/login', async ctx => {
         }
 
     } catch (err) {
-        ctx.throw({
+        ctx.body = ({
             data: null,
             error: true,
             msg: 'Error Logging In'
@@ -206,7 +210,7 @@ router.post('/login', async ctx => {
     }
 })
 
-//Just filling in the jwt for now then moving on to the other end points
+//Jwt Works now 919pm 8/25/2021
 router.use(async function verifyJwt(ctx, next) {
 
     if (!ctx.headers.authorization) {
@@ -241,15 +245,16 @@ router.use(async function verifyJwt(ctx, next) {
     await next();
 })
 
+//tested works
 router.get('/cart', async ctx => {
     try {
         const [cart] = await ctx.state.db.query(
-            `SELECT * FROM customercartorders WHERE email=: email`, {
-            email: ctx.request.body.email
+            `SELECT * FROM customercartorders WHERE email =:email`, {
+            email: ctx.request.body.customerreg.email
         })
-        ctx.body = { cart };
+        ctx.body =  cart;
     } catch (err) {
-        ctx.throw({
+        ctx.throw = ({
             data: null,
             error: true,
             msg: 'Error Cart'
@@ -258,6 +263,7 @@ router.get('/cart', async ctx => {
     }
 });
 
+//tested works
 router.get('/cart/shippingChoice', async ctx => {
     try {
         const [shippingChoice] = await ctx.state.db.query(
@@ -265,25 +271,25 @@ router.get('/cart/shippingChoice', async ctx => {
             email: ctx.request.body.email
         });
 
-        ctx.body = { shippingChoice };
+        ctx.body =  shippingChoice;
     } catch (err) {
-        ctx.throw({
+        ctx.throw= ({
             data: null,
             error: true,
             msg: 'Error Cart Shipping'
         });
     }
 })
-
+//Tested Works
 router.get('/cart/itemTotal', async ctx => {
     try {
         const [itemsTotal] = await ctx.state.db.query(
             `SELECT SUM(productPrice) as itemsTotal FROM customercartorders WHERE email  =:email `, {
             email: ctx.request.body.email
         })
-        ctx.body = { itemsTotal };
+        ctx.body = itemsTotal;
     } catch (err) {
-        ctx.throw({
+        ctx.throw = ({
             data: null,
             error: true,
             msg: 'Error in Cart itemTotal'
@@ -291,10 +297,10 @@ router.get('/cart/itemTotal', async ctx => {
         console.log('Error Getting Item Total', err);
     }
 })
-//Stopped Here for now still convert over
+//tested works
 router.get('/check-out-page/customerInfo', async ctx => {
     try {
-        const [customerInfo] = await req.state.db.query(
+        const [customerInfo] = await ctx.state.db.query(
             `SELECT customerLastName,
                 customerFirstName,
                 phone,
@@ -306,11 +312,11 @@ router.get('/check-out-page/customerInfo', async ctx => {
                 userName,
                 email FROM customerreg WHERE email=:email`,
             {
-                email: ctx.request.customerreg.email
+                email: ctx.request.body.customerreg.email
             })
-        ctx.body = {customerInfo};
+        ctx.body = customerInfo;
     } catch (err) {
-        ctx.throw({
+        ctx.throw =({
             data: null,
             error: true,
             msg: 'Error in Check out Page-CustomerInfo'
@@ -322,6 +328,7 @@ router.get('/check-out-page/customerInfo', async ctx => {
 
 
 //Items are inserted into the "cart" from each product page not the "cart" 
+//tested works
 router.post('/products/:productCode', async ctx => {
     try {
 
@@ -336,13 +343,13 @@ router.post('/products/:productCode', async ctx => {
             productCode: ctx.request.body.productCode,
             productName: ctx.request.body.productName,
             productPrice: ctx.request.body.productPrice,
-            email: ctx.request.body.email,
+            email: ctx.request.body.customerreg.email,
 
         }
         )
 
 
-        ctx.body({
+        ctx.body= ({
             data: cart,
             error: false,
             msg: ''
@@ -358,14 +365,15 @@ router.post('/products/:productCode', async ctx => {
 })
 
 //Deleting items in the cart. 
+//works tested
 router.delete('/cart/:productCode', async ctx => {
     try {
         const [cart] = await ctx.state.db.query(
             `DELETE FROM customercartorders WHERE productCode = :productCode AND email =:email `, {
             productCode: ctx.params.productCode,
-            email: ctx.request.customerreg.email
+            email: ctx.request.body.customerreg.email
         });
-        res.json({
+        ctx.body = ({
             data: cart,
             error: false,
             msg: ''
@@ -374,7 +382,7 @@ router.delete('/cart/:productCode', async ctx => {
 
     } catch (err) {
         console.log('Error In the Delete', err);
-        res.json({
+        ctx.throw = ({
             data: null,
             error: true,
             msg: " Error deleting Items"
@@ -382,49 +390,50 @@ router.delete('/cart/:productCode', async ctx => {
     }
 })
 
-
-router.delete('/shipping', async (req, res) => {
+//tested
+router.delete('/shipping', async ctx => {
     try {
-        const [shippingPickDelete] = await req.db.query(
+        const [shippingPickDelete] = await ctx.state.db.query(
             `DELETE FROM orders WHERE email = :email `, {
-            email: customerreg.email,
+            email: ctx.request.body.customerreg.email,
         }
         );
-        res.json({
+        ctx.body = ({
             data: shippingPickDelete,
             error: false,
             msg: ''
         })
     } catch (err) {
-        res.json({
+        ctx.throw = ({
             data: null,
             error: true,
             msg: 'Error POST SHIPPING '
         });
-
+        console.log(err, 'Error in Deleting shipping')
     }
 })
 
 
 
 //shipping Choice on the shipping page
-router.post('/shipping', async (req, res) => {
+//tested Works
+router.post('/shipping', async ctx => {
     try {
-        const [shippingPick] = await req.db.query(
+        const [shippingPick] = await ctx.state.db.query(
             `INSERT INTO orders (email, shippingType, shippingPrice)
             VALUES (:email,:shippingType,:shippingPrice)`, {
-            email: req.customerreg.email,
-            shippingType: req.body.shippingType,
-            shippingPrice: req.body.shippingPrice
+            email: ctx.request.body.customerreg.email,
+            shippingType: ctx.request.body.shippingType,
+            shippingPrice: ctx.request.body.shippingPrice
         });
 
-        res.json({
+        ctx.body =({
             data: shippingPick,
             error: false,
             msg: ''
         })
     } catch (err) {
-        res.json({
+        ctx.throw =({
             data: null,
             error: true,
             msg: 'Error POST SHIPPING '
@@ -436,5 +445,5 @@ router.post('/shipping', async (req, res) => {
 
 
 app.use(router.routes());
-app.use(router.allowedMethods());
+//app.use(router.allowedMethods());
 app.listen(port, () => console.log(`Demo app listening at http://localhost:${port}`));

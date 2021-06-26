@@ -164,10 +164,11 @@ app.post('/login', async function (req, res) {
             });
         }
 
-
-        const customerPassword = ` ${customerreg.passWord}`;
+        console.log(customerreg);
+        const customerPassword = `${customerreg.passWord}`;
 
         console.log('customerPassword', customerPassword);
+        console.log('customerPassword ctx', req.body.passWord);
 
         const compare = await bcrypt.compare(req.body.passWord, customerPassword);
 

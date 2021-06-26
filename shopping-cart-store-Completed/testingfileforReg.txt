@@ -11,3 +11,10 @@
 "email": "fakeEmail3445@email.com",
 "passWord": "fakePassword"
 }
+
+{
+"productCode":"13542134",
+"productName": "Thing",
+"productPrice": "11",
+"email": "fakeEmail3445@email.com"
+}
