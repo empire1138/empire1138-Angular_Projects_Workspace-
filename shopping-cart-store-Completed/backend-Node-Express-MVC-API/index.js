@@ -33,13 +33,14 @@ app.use((req, res, next) => {
 app.use('/', startPageRoutes);
 // app.use('/products', productsRoutes); 
 // app.use('/shipping', shippingRoutes); 
-// app.use('/registration', registrationRoutes); 
+// app.use('/registration', registrationRoutes);
+// app.use('/login', loginRoutes); 
 app.use(errorController.get404);
 app.use(errorController.get500);
 //Protected Routes
 // app.use('/cart', cartRoutes); 
 // app.use('/check-out-page', checkOutPageRoutes); 
-// app.use('/login', loginRoutes); 
+ 
 
 
 app.listen(port, () => console.log(`Demo app listening at http://localhost:${port}`));
