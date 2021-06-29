@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "tic-tac-toe-game"
+  "defaultProject": "tic-tac-toe-game",
+  "cli": {
+    "analytics": false
+  }
 }
