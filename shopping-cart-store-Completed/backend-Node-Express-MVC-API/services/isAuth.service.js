@@ -1,4 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = authorize;
+module.exports = {
+    async authCheck() = 
+
+
+
+}
+       
+;
 
