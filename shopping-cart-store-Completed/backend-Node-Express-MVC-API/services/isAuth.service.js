@@ -1,11 +1,9 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = {
-    async authCheck( ) 
+module.exports = async (res,req,next) => {
 
 
 
+    
 }
-       
-;
 
