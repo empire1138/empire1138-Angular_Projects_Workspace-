@@ -1,38 +1,64 @@
-
 <div class="main-container">
-  <div class="player-display">
-    <div class="player-one">
-      <div class="player-one-lives"></div>
-      <div class="player-one-diceScore"></div>
-    </div>
-    <div class="player-two">
-      <div class="player-two-lives"></div>
-      <div class="player-two-diceScore"></div>
-    </div>
-    <div class="player-three">
-      <div class="player-three-lives"></div>
-      <div class="player-three-diceScore"></div>
-    </div>
-    <div class="player-four">
-      <div class="player-four-lives"></div>
-      <div class="player-four-diceScore"></div>
-    </div>
-  </div>
-  
-  <div class="game-board containter-fluild">
+  <div class="player-display-area-container">
     <div class="row">
-      <div class="player-one-diceRoll"
-      class="subfield col"
-      ></div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 1</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 1 lives</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 1 Score</div>
+      </div>
     </div>
     <div class="row">
-      <div class="player-three-diceRoll"></div>
-      <div class="pool-table"></div>
-      <div class="player-four-diceRoll"></div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 2</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 2 lives</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 2 score</div>
+      </div>
     </div>
-    <div class="row">  
-      <div class="player-two-diceRoll"></div>
+    <div class="row" >
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 3</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 3 live</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 3 Score</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 4</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 4 lives</div>
+      </div>
+      <div class="subfield col-4 text-diplay">
+        <div class="text-display">Player 4 Score</div>
+      </div>
     </div>
   </div>
-  <div class="dice_roll_btn"></div>
+
+  <div class="gameboard-container">
+    <div class="row game-board-row-1 gameboard-subfield">
+      <div>player 1 Dice</div>
+    </div>
+    <div class="row game-board-row-2 gameboard-subfield">
+      <div>Player 3 Dice</div>
+      <div>
+            <button>Roll</button>
+        </div>
+      <div>Player 4 Dice</div>
+    </div>
+    <div class="row game-board-row-3 gameboard-subfield">
+      <div>Player 2 Dice</div>
+    </div>
+  </div>
 </div>

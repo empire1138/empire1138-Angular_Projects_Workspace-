@@ -1,0 +1,156 @@
+
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(24,223,30);
+background: linear-gradient(149deg, rgba(24,223,30,1) 1%, rgba(241,30,30,0.9892157546612395) 100%);
+}
+
+.player-display-area-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+  width: 99vw;
+  border: 1px solid red;
+}
+
+.subfield {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 24vw;
+  border: 1px solid black;
+  
+}
+
+.gameboard-container {
+  display: flex;
+  flex-direction: column; 
+  
+  border: 1px solid black;
+  width: 99vw;
+  height: 62vh;
+  align-items: stretch;
+  color: red;
+  background-image: url('/assets/pool-4873047_960_720.jpg');
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+
+}
+
+.gameboard-subfield{
+    display: flex;
+    border: 1px solid green;
+    
+    width:100%;
+    height: 100%;
+}
+.game-board-row-1 {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.game-board-row-2 {
+  order: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.game-board-row-3 {
+  order: 3;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.pool-table{
+    width:98vw;
+    height: auto;
+    display: block;
+    margin-left: auto;
+
+  
+}
+
+/* @media only screen and (max-width: 700px) {
+    .pool-table {
+      width: 30%;
+      margin: 6px 0;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .pool-table {
+      width: 100%;
+    }
+  } */
+
+  .text-display{
+    color: rgb(246, 245, 248);
+    text-shadow:
+      0 0 1px #fff,
+      0 0 2px #fff,
+      0 0 3px #fff,
+      0 0 4px #bc13fe,
+      0 0 5px #bc13fe,
+      0 0 10px #bc13fe,
+      0 0 12px #bc13fe,
+      0 0 14px #bc13fe;
+
+      font-size: 14px;
+      animation: pulsate 1.5s infinite alternate;  
+      /* border: 0.2rem solid #fff;
+      border-radius: 2rem;
+      padding: 0.4em; */
+      /* box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #bc13fe,
+                0 0 0.8rem #bc13fe,
+                0 0 2.8rem #bc13fe,
+                inset 0 0 1.3rem #bc13fe;  */
+
+    /* text-align: center;
+    font-weight: 400;  */
+  }
+
+
+  
+  /* body {
+    font-size: 18px;
+    font-family: "Sacramento", sans-serif;
+    background-color: #010a01;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }   */
+  
+ 
+  @keyframes pulsate {
+      
+    100% {
+        text-shadow:
+        0 0 1px #fff,
+        0 0 4px #bc13fe,
+        0 0 5px #bc13fe,
+        0 0 10px #bc13fe,
+        0 0 12px #bc13fe,
+        0 0 14px #bc13fe;
+    }
+    
+    0% {
+      text-shadow:
+      0 0 2px #fff,
+      0 0 10px #bc13fe,
+     
+  }
+}
